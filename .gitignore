@@ -1,3 +1,10 @@
 env/
 .vscode/
-
+*.replit
+*template.html
+*wine.xlsx
+*wine2.xlsx
+*wine3.xlsx
+*.idea
+*.ipynb_checkpoints
+*venv
