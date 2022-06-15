@@ -1,10 +1,15 @@
-
+import os
+import pandas as pd
+from collections import defaultdict
+from dotenv import load_dotenv
+from datetime import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from datetime import datetime
-from pprint import pprint
-from collections import defaultdict
-import pandas as pd
+
+load_dotenv()
+
+path_to_file = os.getenv("PATH_TO_FILE")
+
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -13,9 +18,9 @@ env = Environment(
 
 template = env.get_template('template.html')
 
-fonder_date = datetime(year=1920, month=1, day=1)
-now_date = datetime.now()
-founder_year = (now_date - fonder_date).days // 365
+date_now = datetime.now()
+founder_year = (date_now.year - 1920)
+
 if founder_year == 100:
     text_year = "лет"
 elif founder_year == 101:
@@ -25,9 +30,8 @@ elif 101 < founder_year <= 104:
 elif founder_year > 104:
     text_year = "лет"
 
-founder = f"Уже {founder_year} {text_year} с вами",
 
-wine_table = pd.read_excel('wine3.xlsx', sheet_name='Лист1',
+wine_table = pd.read_excel(path_to_file, sheet_name='Лист1',
                            na_values='nan', keep_default_na=False)
 
 wines = wine_table.to_dict(orient="records")
@@ -38,7 +42,7 @@ for wine in wines:
     final_form_of_wines[category].append(wine)
 
 rendered_page = template.render(
-    founder=f"Уже {founder_year} {text_year} с вами",
+    founder_date=f"Уже {founder_year} {text_year} с вами",
     categories=final_form_of_wines.keys(),
     wines=final_form_of_wines
 )
@@ -47,4 +51,4 @@ with open('index.html', 'w', encoding="utf8") as file:
     file.write(rendered_page)
 
 server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
-server.serve_forever()
+# server.serve_forever()
