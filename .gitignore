@@ -8,3 +8,4 @@ env/
 *.idea
 *.ipynb_checkpoints
 *venv
+*index.html
