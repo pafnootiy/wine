@@ -1,10 +1,14 @@
 import os
+
 import pandas as pd
+
 from collections import defaultdict
 from dotenv import load_dotenv
 from datetime import datetime
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+
 
 
 def get_year_of_founder():
