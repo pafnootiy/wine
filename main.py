@@ -54,7 +54,7 @@ def main():
     final_form_of_wines = get_data_from_excel_table(path_to_file)
 
     rendered_page = template.render(
-        founder_date=f"Уже {founder_year} {text_year} с вами",
+        string_with_year=f"Уже {founder_year} {text_year} с вами",
         categories=final_form_of_wines.keys(),
         wines=final_form_of_wines
     )
