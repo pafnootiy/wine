@@ -32,12 +32,12 @@ def get_data_from_excel_table(path_to_file):
     wine_table = pd.read_excel(path_to_file, sheet_name='Лист1',
                                na_values='nan', keep_default_na=False)
     wines = wine_table.to_dict(orient="records")
-    final_form = defaultdict(list)
+    data_from_excel = defaultdict(list)
 
     for wine in wines:
         category = wine.get("Категория")
-        final_form[category].append(wine)
-    return final_form
+        data_from_excel[category].append(wine)
+    return data_from_excel
 
 
 def main():
