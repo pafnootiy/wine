@@ -1,32 +1,31 @@
 import os
+from datetime import datetime
 
 import pandas as pd
-
 from collections import defaultdict
 from dotenv import load_dotenv
-from datetime import datetime
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 
-
 def get_year_of_founder():
     date_now = datetime.now()
-    founder_year = (date_now.year - 1920)
+    year_of_founder = 1920
+    number_of_years = (date_now.year - year_of_founder)
 
-    if founder_year == 100:
+    if number_of_years == 100:
         text_year = "лет"
-        return founder_year, text_year
-    elif founder_year == 101:
+        return number_of_years, text_year
+    elif number_of_years == 101:
         text_year = "год"
-        return founder_year, text_year
-    elif 101 < founder_year <= 104:
+        return number_of_years, text_year
+    elif 101 < number_of_years <= 104:
         text_year = "годa"
-        return founder_year, text_year
-    elif founder_year > 104:
+        return number_of_years, text_year
+    elif number_of_years > 104:
         text_year = "лет"
-        return founder_year, text_year
+        return number_of_years, text_year
 
 
 def give_data_for_site_fill(path_to_file):
