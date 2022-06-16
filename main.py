@@ -28,7 +28,7 @@ def get_year_of_founder():
         return number_of_years, text_year
 
 
-def give_data_for_site_fill(path_to_file):
+def get_data_from_excel_table(path_to_file):
     wine_table = pd.read_excel(path_to_file, sheet_name='Лист1',
                                na_values='nan', keep_default_na=False)
     wines = wine_table.to_dict(orient="records")
@@ -51,7 +51,7 @@ def main():
     template = env.get_template('template.html')
     founder_year, text_year = get_year_of_founder()
 
-    final_form_of_wines = give_data_for_site_fill(path_to_file)
+    final_form_of_wines = get_data_from_excel_table(path_to_file)
 
     rendered_page = template.render(
         founder_date=f"Уже {founder_year} {text_year} с вами",
