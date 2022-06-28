@@ -51,11 +51,11 @@ def main():
     template = env.get_template('template.html')
     founder_year, text_year = get_year_of_founder()
 
-    final_form_of_wines = get_data_from_excel_table(path_to_file)
+    table_with_wines = get_data_from_excel_table(path_to_file)
 
     rendered_page = template.render(
         string_with_year=f"Уже {founder_year} {text_year} с вами",
-        wines=final_form_of_wines
+        wines=table_with_wines
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
