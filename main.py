@@ -42,7 +42,7 @@ def get_data_from_excel_table(path_to_file):
 
 def main():
     load_dotenv()
-    file_path = os.getenv("PATH_TO_FILE")
+    path_to_file = os.getenv("PATH_TO_FILE")
 
     env = Environment(
         loader=FileSystemLoader('.'),
@@ -51,11 +51,11 @@ def main():
     template = env.get_template('template.html')
     founder_year, text_year = get_year_of_founder()
 
-    table_with_wines = get_data_from_excel_table(file_path)
+    final_form_of_wines = get_data_from_excel_table(path_to_file)
 
     rendered_page = template.render(
         string_with_year=f"Уже {founder_year} {text_year} с вами",
-        wines=table_with_wines
+        wines=final_form_of_wines
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
